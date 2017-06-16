@@ -2,7 +2,7 @@ module FlashCookieSession
   class Middleware
     USER_AGENT_MATCHER = /^(Adobe|Shockwave) Flash/.freeze
     HTTP_REFERER_MATCHER = /\.swf$/.freeze
-    SWFUPLOAD_MATCHER = /swfupload$/
+    SWFUPLOAD_MATCHER = /(\/admin\/.*\/media\/[0-9]+\-.*|swfupload|new_image|new_attachment)$/
 
     def initialize(app, session_key = Rails.application.config.session_options[:key])
       @app = app
@@ -28,6 +28,7 @@ module FlashCookieSession
           puts "Applied cookie: #{env['HTTP_COOKIE']}"
           puts "Applying session key: #{the_session_key.inspect}"
         end
+        # need to revisit whether we should always do this ? Fri 16 Jun 2017 15:47:57 
         env['HTTP_ACCEPT'] = "#{req.params['_http_accept']}".freeze if req.params['_http_accept']
       end
 
