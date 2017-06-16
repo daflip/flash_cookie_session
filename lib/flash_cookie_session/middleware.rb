@@ -2,7 +2,7 @@ module FlashCookieSession
   class Middleware
     USER_AGENT_MATCHER = /^(Adobe|Shockwave) Flash/.freeze
     HTTP_REFERER_MATCHER = /\.swf$/.freeze
-    SWFUPLOAD_MATCHER = /(\/admin\/.*\/media\/[0-9]+\-.*|swfupload|new_image|new_attachment)$/
+    SWFUPLOAD_MATCHER = /(\/admin\/.*\/media\/[0-9]+|swfupload|new_image|new_attachment)$/
 
     def initialize(app, session_key = Rails.application.config.session_options[:key])
       @app = app
